@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "shittyEtsy (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "shittyEtsy (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
