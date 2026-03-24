@@ -50,7 +50,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-    
+
                             <Grid Grid.Row="0" Margin="0,0,0,6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -63,11 +63,11 @@
                                            FontWeight="Bold"
                                            Foreground="#FFFFFF"/>
 
-                      
-                          
+
+
                             </Grid>
 
-                  
+
                             <TextBlock Grid.Row="1"
                                        Text="{x:Bind Description}"
                                        TextWrapping="Wrap"
@@ -80,7 +80,7 @@
                                         Spacing="8"
                                         Margin="0,0,0,12">
 
-                            
+
                                 <Border Background="#2A2A2A" CornerRadius="4" Padding="8,4">
                                     <StackPanel Orientation="Horizontal" Spacing="4">
                                         <TextBlock Text="Material:" FontSize="12"/>
@@ -90,7 +90,7 @@
                                     </StackPanel>
                                 </Border>
 
-                              
+
                                 <Border Background="#2A2A2A" CornerRadius="4" Padding="8,4">
                                     <StackPanel Orientation="Horizontal" Spacing="4">
                                         <TextBlock Text="Complexity:" FontSize="12"/>
@@ -100,7 +100,7 @@
                                     </StackPanel>
                                 </Border>
 
-                              
+
                                 <Border Background="#2A2A2A" CornerRadius="4" Padding="8,4">
                                     <StackPanel Orientation="Horizontal" Spacing="4">
                                         <TextBlock Text="Durability:" FontSize="12"/>
@@ -110,7 +110,7 @@
                                     </StackPanel>
                                 </Border>
 
-               
+
                                 <Border Background="#2A2A2A" CornerRadius="4" Padding="8,4">
                                     <StackPanel Orientation="Horizontal" Spacing="4">
                                         <TextBlock Text="Production Time:" FontSize="12"/>
@@ -120,7 +120,7 @@
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
-                            
+
                             <Grid Grid.Row="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -146,7 +146,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <TextBlock Text="Home page" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FFFFFF"/>
         <Button Content="Go to Create Product" Click="GoToCreateProductPage_Click" Padding="15,10" Background="#4CAF50" Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0" CornerRadius="4"/>
     </Grid>
 </Page>

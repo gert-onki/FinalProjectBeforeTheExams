@@ -49,6 +49,7 @@ namespace shittyEtsy
 
             //using (var context = new AppDataContext())
             //{
+            //    context.Database.EnsureDeleted();
             //    context.Database.EnsureCreated();
             //    SeedData.Seed(context);
             //}
