@@ -12,6 +12,8 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using shittyEtsy.Views;
+using shittyEtsy.Data;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -26,6 +28,12 @@ namespace shittyEtsy
         public MainWindow()
         {
             InitializeComponent();
+            var db = new AppDataContext();
+            
+            //db.Database.EnsureDeleted();
+            db.Database.EnsureCreated();
+
+            MainFrame.Navigate(typeof(LoginPage));
         }
     }
 }

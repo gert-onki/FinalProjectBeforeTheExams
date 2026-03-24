@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace shittyEtsy.Data.Models
 {
-    internal class Roles
+    public class Roles
     {
     }
 }
