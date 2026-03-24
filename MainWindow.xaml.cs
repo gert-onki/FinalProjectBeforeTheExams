@@ -30,7 +30,7 @@ namespace shittyEtsy
             InitializeComponent();
             var db = new AppDataContext();
             
-            //db.Database.EnsureDeleted();
+            db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
 
             MainFrame.Navigate(typeof(LoginPage));

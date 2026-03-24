@@ -46,7 +46,7 @@ namespace shittyEtsy
         {
             _window = new MainWindow();
             _window.Activate();
-
+            MainWindow = _window;
             //using (var context = new AppDataContext())
             //{
             //    context.Database.EnsureDeleted();
@@ -54,5 +54,6 @@ namespace shittyEtsy
             //    SeedData.Seed(context);
             //}
         }
+        public static Window MainWindow { get; private set; }
     }
 }
