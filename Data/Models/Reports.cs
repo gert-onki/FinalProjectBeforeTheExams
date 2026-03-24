@@ -8,5 +8,10 @@ namespace shittyEtsy.Data.Models
 {
     public class Reports
     {
+        public int Id { get; set; }
+        public int ProductId { get; set; }
+        public int FlaggedBy { get; set; }
+        public string Reason { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
