@@ -36,5 +36,10 @@ namespace shittyEtsy.Views
             var products = Db.Product.ToList();
             productsList.ItemsSource = products;
         }
+        
+        private void GoToCreateProductPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CreateProductPage));
+        }
     }
 }
