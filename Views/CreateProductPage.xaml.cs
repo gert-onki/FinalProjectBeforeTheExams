@@ -21,9 +21,9 @@ namespace shittyEtsy.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class List : Page
+    public sealed partial class CreateProductPage : Page
     {
-        public List()
+        public CreateProductPage()
         {
             InitializeComponent();
         }

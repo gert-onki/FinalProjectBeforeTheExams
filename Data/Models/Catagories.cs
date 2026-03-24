@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace shittyEtsy.Data.Models
 {
-    internal class Catagories
+    public class Catagories
     {
         public int Id { get; set; }
         public string Name { get; set; }

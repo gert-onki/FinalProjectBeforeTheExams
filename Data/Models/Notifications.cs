@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace shittyEtsy.Data.Models
 {
-    internal class Notifications
+    public class Notifications
     {
         public int Id { get; set; }
         public int UserId { get; set; }
