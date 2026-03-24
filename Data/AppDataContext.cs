@@ -13,8 +13,10 @@ namespace shittyEtsy.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Products> Product { get; set; }
 
-       
-
+        public DbSet<Catagories> Categories { get; set; }  
+        public DbSet<Reviews> Reviews { get; set; }        
+        public DbSet<Transaction> Transactions { get; set; } 
+        public DbSet<Reports> Reports { get; set; }
 
 
 

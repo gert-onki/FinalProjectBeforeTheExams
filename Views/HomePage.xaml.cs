@@ -5,8 +5,10 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using shittyEtsy.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,6 +28,13 @@ namespace shittyEtsy.Views
         public HomePage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            using var Db = new Data.AppDataContext();
+            var products = Db.Product.ToList();
+            productsList.ItemsSource = products;
         }
     }
 }
