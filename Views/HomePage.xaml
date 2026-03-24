@@ -10,5 +10,6 @@
 
     <Grid>
         <TextBlock Text="Home page" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FFFFFF"/>
+        <Button Content="Go to Create Product" Click="GoToCreateProductPage_Click" Padding="15,10" Background="#4CAF50" Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0" CornerRadius="4"/>
     </Grid>
 </Page>

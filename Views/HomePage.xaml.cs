@@ -27,5 +27,10 @@ namespace shittyEtsy.Views
         {
             InitializeComponent();
         }
+
+        private void GoToCreateProductPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CreateProductPage));
+        }
     }
 }
