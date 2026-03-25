@@ -92,5 +92,10 @@ namespace shittyEtsy.Views
             ErrorText.Text = message;
             ErrorText.Visibility = Visibility.Visible;
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(HomePage));
+        }
     }
 }
