@@ -7,12 +7,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:localData="using:shittyEtsy.Data.Models"
+xmlns:localViews="using:shittyEtsy.Views"
     mc:Ignorable="d">
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0"
@@ -23,129 +25,140 @@
                    Foreground="#FFFFFF"
                    Margin="0,20,0,12"/>
 
-        <ListView Grid.Row="1"
+        <GridView Grid.Row="1"
                   x:Name="productsList"
                   SelectionMode="None"
-                  Padding="16,0">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="Margin" Value="0,6"/>
-                </Style>
-            </ListView.ItemContainerStyle>
+                  Padding="16,0"
+                  IsItemClickEnabled="False">
 
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="localData:Products">
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="8"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </GridView.ItemContainerStyle>
+
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal" ItemWidth="320" ItemHeight="420"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="localViews:ProductViewModel">
                     <Border Background="#1E1E1E"
-                            CornerRadius="10"
-                            Padding="16"
-                            BorderBrush="#333333"
-                            BorderThickness="1">
+            CornerRadius="10"
+            BorderBrush="#333333"
+            BorderThickness="1"
+            Width="300">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="140"/>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
+                            <Border Grid.Row="0" CornerRadius="10,10,0,0" Background="#2A2A2A">
+                                <Image Source="{x:Bind Image}" Stretch="UniformToFill"/>
+                            </Border>
+                            
+                            <!-- Card body -->
+                            <Grid Grid.Row="1" Padding="16,14,16,8">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="0" Margin="0,0,0,6">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Column="0"
+                                <TextBlock Grid.Row="0"
                                            Text="{x:Bind Name}"
-                                           FontSize="20"
+                                           FontSize="18"
                                            FontWeight="Bold"
-                                           Foreground="#FFFFFF"/>
+                                           Foreground="#FFFFFF"
+                                           TextTrimming="CharacterEllipsis"
+                                           Margin="0,0,0,6"/>
 
-
-
-                            </Grid>
-
-
-                            <TextBlock Grid.Row="1"
-                                       Text="{x:Bind Description}"
-                                       TextWrapping="Wrap"
-                                       Foreground="#AAAAAA"
-                                       FontSize="14"
-                                       Margin="0,0,0,12"/>
-
-                            <StackPanel Grid.Row="2"
-                                        Orientation="Horizontal"
-                                        Spacing="8"
-                                        Margin="0,0,0,12">
-
-
-                                <Border Background="#2A2A2A" CornerRadius="4" Padding="8,4">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <TextBlock Text="Material:" FontSize="12"/>
-                                        <TextBlock Text="{x:Bind Material}"
-                                                   FontSize="12"
-                                                   Foreground="#CCCCCC"/>
-                                    </StackPanel>
-                                </Border>
-
-
-                                <Border Background="#2A2A2A" CornerRadius="4" Padding="8,4">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <TextBlock Text="Complexity:" FontSize="12"/>
-                                        <TextBlock Text="{x:Bind Complexity}"
-                                                   FontSize="12"
-                                                   Foreground="#CCCCCC"/>
-                                    </StackPanel>
-                                </Border>
-
-
-                                <Border Background="#2A2A2A" CornerRadius="4" Padding="8,4">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <TextBlock Text="Durability:" FontSize="12"/>
-                                        <TextBlock Text="{x:Bind Durability}"
-                                                   FontSize="12"
-                                                   Foreground="#CCCCCC"/>
-                                    </StackPanel>
-                                </Border>
-
-
-                                <Border Background="#2A2A2A" CornerRadius="4" Padding="8,4">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <TextBlock Text="Production Time:" FontSize="12"/>
-                                        <TextBlock Text="{x:Bind ProductionTime}"
-                                                   FontSize="12"
-                                                   Foreground="#CCCCCC"/>
-                                    </StackPanel>
-                                </Border>
-                            </StackPanel>
-
-                            <Grid Grid.Row="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Column="0"
-                                           Text="{x:Bind UniqueFeatures}"
+                                <TextBlock Grid.Row="1"
+                                           Text="{x:Bind Description}"
+                                           TextWrapping="Wrap"
+                                           Foreground="#AAAAAA"
                                            FontSize="13"
-                                           FontStyle="Italic"
-                                           Foreground="#888888"
-                                           VerticalAlignment="Center"/>
+                                           MaxLines="3"
+                                           TextTrimming="CharacterEllipsis"
+                                           Margin="0,0,0,10"/>
 
-                                <TextBlock Grid.Column="1"
-                                           Text="{x:Bind CreatedAt}"
-                                           FontSize="12"
-                                           Foreground="#555555"
-                                           VerticalAlignment="Center"/>
+                                <StackPanel Grid.Row="2"
+                                            Orientation="Horizontal"
+                                            Spacing="6"
+                                            Margin="0,0,0,4">
+                                    <Border Background="#2A2A2A" CornerRadius="4" Padding="7,3">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <TextBlock Text="Material:" FontSize="11" Foreground="#777777"/>
+                                            <TextBlock Text="{x:Bind Material}" FontSize="11" Foreground="#CCCCCC"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Background="#2A2A2A" CornerRadius="4" Padding="7,3">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <TextBlock Text="Complexity:" FontSize="11" Foreground="#777777"/>
+                                            <TextBlock Text="{x:Bind Complexity}" FontSize="11" Foreground="#CCCCCC"/>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
                             </Grid>
 
+                            <!-- Card footer -->
+                            <Border Grid.Row="2"
+                                    Background="#161616"
+                                    CornerRadius="0,0,10,10"
+                                    Padding="16,10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="6">
+                                        <Border Background="#2A2A2A" CornerRadius="4" Padding="6,2">
+                                            <StackPanel Orientation="Horizontal" Spacing="3">
+                                                <TextBlock Text="Durability:" FontSize="11" Foreground="#777777"/>
+                                                <TextBlock Text="{x:Bind Durability}" FontSize="11" Foreground="#CCCCCC"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Background="#2A2A2A" CornerRadius="4" Padding="6,2">
+                                            <StackPanel Orientation="Horizontal" Spacing="3">
+                                                <TextBlock Text="Production Time:" FontSize="11" Foreground="#777777"/>
+                                                <TextBlock Text="{x:Bind ProductionTime}" FontSize="11" Foreground="#CCCCCC"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+
+                                    <TextBlock Grid.Column="1"
+                                               Text="{x:Bind UniqueFeatures}"
+                                               FontSize="11"
+                                               FontStyle="Italic"
+                                               Foreground="#555555"
+                                               VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis"
+                                               MaxWidth="100"/>
+                                </Grid>
+                            </Border>
                         </Grid>
                     </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Button Content="Go to Create Product" Click="GoToCreateProductPage_Click" Padding="15,10" Background="#4CAF50" Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0" CornerRadius="4"/>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <Button Grid.Row="2"
+                Content="Go to Create Product"
+                Click="GoToCreateProductPage_Click"
+                Padding="15,10"
+                Background="#4CAF50"
+                Foreground="White"
+                FontSize="14"
+                HorizontalAlignment="Center"
+                Margin="0,12,0,16"
+                CornerRadius="4"/>
     </Grid>
 </Page>
