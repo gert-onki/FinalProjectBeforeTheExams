@@ -64,7 +64,7 @@ xmlns:localViews="using:shittyEtsy.Views"
                                 <Image Source="{x:Bind Image}" Stretch="UniformToFill"/>
                             </Border>
                             
-                            <!-- Card body -->
+                           
                             <Grid Grid.Row="1" Padding="16,14,16,8">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -108,7 +108,7 @@ xmlns:localViews="using:shittyEtsy.Views"
                                 </StackPanel>
                             </Grid>
 
-                            <!-- Card footer -->
+                           
                             <Border Grid.Row="2"
                                     Background="#161616"
                                     CornerRadius="0,0,10,10"
