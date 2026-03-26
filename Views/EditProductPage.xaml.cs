@@ -56,29 +56,19 @@ namespace shittyEtsy.Views
                 Frame.Navigate(typeof(HomePage));
                 return;
             }
-
-            // Populate form with product data
             NameInput.Text = _product.Name;
             DescriptionInput.Text = _product.Description;
             MaterialInput.Text = _product.Material;
             UniqueFeaturesInput.Text = _product.UniqueFeatures;
 
-            // Set category based on CatagoryId
             if (_product.CatagoryId > 0 && _product.CatagoryId <= CategoryInput.Items.Count)
             {
                 CategoryInput.SelectedIndex = _product.CatagoryId - 1;
             }
 
-            // Set production time
             SetComboBoxByContent(ProductionTimeInput, _product.ProductionTime);
-
-            // Set complexity
             SetComboBoxByContent(ComplexityInput, _product.Complexity);
-
-            // Set durability
             SetComboBoxByContent(DurabilityInput, _product.Durability);
-
-            // Load and display image if exists
             if (_product.ImageData != null && _product.ImageData.Length > 0)
             {
                 _imageData = _product.ImageData;
@@ -158,8 +148,6 @@ namespace shittyEtsy.Views
             }
 
             using var db = new AppDataContext();
-
-            // Re-fetch product to ensure we have the latest version
             var productToUpdate = db.Product.Find(_product.Id);
 
             if (productToUpdate == null)
@@ -168,14 +156,12 @@ namespace shittyEtsy.Views
                 return;
             }
 
-            // Verify ownership again
             if (productToUpdate.UserId != SessionManager.CurrentUser.Id)
             {
                 ShowError("You can only edit your own products.");
                 return;
             }
 
-            // Update product fields
             productToUpdate.Name = name;
             productToUpdate.Description = description;
             productToUpdate.Material = material;
@@ -185,7 +171,6 @@ namespace shittyEtsy.Views
             productToUpdate.UniqueFeatures = uniqueFeatures;
             productToUpdate.CatagoryId = categoryId;
 
-            // Update image if new one was selected
             if (_imageData != null)
             {
                 productToUpdate.ImageData = _imageData;
@@ -193,8 +178,6 @@ namespace shittyEtsy.Views
 
             db.Product.Update(productToUpdate);
             db.SaveChanges();
-
-            // Navigate back to home
             Frame.Navigate(typeof(HomePage));
         }
 

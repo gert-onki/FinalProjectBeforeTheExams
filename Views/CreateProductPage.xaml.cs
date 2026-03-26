@@ -78,7 +78,7 @@ namespace shittyEtsy.Views
                 UniqueFeatures = uniqueFeatures,
                 IsVerified = false,
                 CreatedAt = DateTime.UtcNow,
-                ImageData = _imageData  // will be null if no image picked, that's fine
+                ImageData = _imageData
             };
 
             db.Product.Add(product);

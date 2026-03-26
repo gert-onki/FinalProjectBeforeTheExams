@@ -70,7 +70,6 @@
                 <ComboBoxItem Content="Very Durable"/>
             </ComboBox>
 
-            <!-- Unique Features -->
             <TextBlock Text="Unique Features" FontWeight="SemiBold"/>
             <TextBox x:Name="UniqueFeaturesInput"
                      PlaceholderText="What makes your product special? e.g. Personalized, Eco-friendly..."
@@ -78,12 +77,9 @@
                      TextWrapping="Wrap"
                      Height="80"/>
 
-
-            <!-- Product Image -->
             <Button x:Name="PickImageButton" Content="Choose Image" Click="PickImageButton_Click"/>
             <Image x:Name="ImagePreview" MaxHeight="200" Margin="0,8,0,0" Stretch="Uniform" Visibility="Collapsed"/>
 
-            <!-- Error Text -->
             <TextBlock x:Name="ErrorText" Foreground="Red" Visibility="Collapsed" TextWrapping="Wrap"/>
 
             <!-- Button Panel -->
