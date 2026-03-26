@@ -7,7 +7,7 @@ using shittyEtsy.Data.Models;
 using shittyEtsy.Session;
 using System;
 using System.IO;
-using Windows.Storage;
+using System.Linq;
 using Windows.Storage.Pickers;
 
 namespace shittyEtsy.Views
@@ -28,6 +28,7 @@ namespace shittyEtsy.Views
 
             if (e.Parameter is int productId)
             {
+                LoadCategories();
                 LoadProduct(productId);
             }
             else
@@ -35,6 +36,16 @@ namespace shittyEtsy.Views
                 ShowError("Product not found.");
                 Frame.Navigate(typeof(HomePage));
             }
+        }
+
+        private void LoadCategories()
+        {
+            using var db = new AppDataContext();
+            var categories = db.Categories.ToList();
+
+            CategoryInput.Items.Clear();
+            foreach (var cat in categories)
+                CategoryInput.Items.Add(new ComboBoxItem { Content = cat.Name, Tag = cat.Id });
         }
 
         private void LoadProduct(int productId)
@@ -49,7 +60,6 @@ namespace shittyEtsy.Views
                 return;
             }
 
-            // Check if current user owns this product
             if (_product.UserId != SessionManager.CurrentUser.Id)
             {
                 ShowError("You can only edit your own products.");
@@ -57,28 +67,25 @@ namespace shittyEtsy.Views
                 return;
             }
 
-            // Populate form with product data
             NameInput.Text = _product.Name;
             DescriptionInput.Text = _product.Description;
             MaterialInput.Text = _product.Material;
+            PriceInput.Text = _product.Price.ToString("0.00");
             UniqueFeaturesInput.Text = _product.UniqueFeatures;
 
-            // Set category based on CatagoryId
-            if (_product.CatagoryId > 0 && _product.CatagoryId <= CategoryInput.Items.Count)
+            for (int i = 0; i < CategoryInput.Items.Count; i++)
             {
-                CategoryInput.SelectedIndex = _product.CatagoryId - 1;
+                if (CategoryInput.Items[i] is ComboBoxItem item && (int)item.Tag == _product.CatagoryId)
+                {
+                    CategoryInput.SelectedIndex = i;
+                    break;
+                }
             }
 
-            // Set production time
             SetComboBoxByContent(ProductionTimeInput, _product.ProductionTime);
-
-            // Set complexity
             SetComboBoxByContent(ComplexityInput, _product.Complexity);
-
-            // Set durability
             SetComboBoxByContent(DurabilityInput, _product.Durability);
 
-            // Load and display image if exists
             if (_product.ImageData != null && _product.ImageData.Length > 0)
             {
                 _imageData = _product.ImageData;
@@ -92,8 +99,7 @@ namespace shittyEtsy.Views
 
             for (int i = 0; i < comboBox.Items.Count; i++)
             {
-                var item = comboBox.Items[i] as ComboBoxItem;
-                if (item?.Content?.ToString() == content)
+                if (comboBox.Items[i] is ComboBoxItem item && item.Content?.ToString() == content)
                 {
                     comboBox.SelectedIndex = i;
                     break;
@@ -122,9 +128,8 @@ namespace shittyEtsy.Views
 
             try
             {
-                var memoryStream = new System.IO.MemoryStream(_imageData);
                 var bitmap = new BitmapImage();
-                bitmap.SetSource(memoryStream.AsRandomAccessStream());
+                bitmap.SetSource(new MemoryStream(_imageData).AsRandomAccessStream());
                 ImagePreview.Source = bitmap;
                 ImagePreview.Visibility = Visibility.Visible;
             }
@@ -143,7 +148,7 @@ namespace shittyEtsy.Views
             string complexity = (ComplexityInput.SelectedItem as ComboBoxItem)?.Content?.ToString();
             string durability = (DurabilityInput.SelectedItem as ComboBoxItem)?.Content?.ToString();
             string uniqueFeatures = UniqueFeaturesInput.Text;
-            int categoryId = CategoryInput.SelectedIndex + 1;
+            decimal price = decimal.TryParse(PriceInput.Text, out var p) ? p : 0;
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description))
             {
@@ -151,15 +156,15 @@ namespace shittyEtsy.Views
                 return;
             }
 
-            if (CategoryInput.SelectedItem == null)
+            if (CategoryInput.SelectedItem is not ComboBoxItem selectedCategory)
             {
                 ShowError("Please select a category.");
                 return;
             }
 
-            using var db = new AppDataContext();
+            int categoryId = (int)selectedCategory.Tag;
 
-            // Re-fetch product to ensure we have the latest version
+            using var db = new AppDataContext();
             var productToUpdate = db.Product.Find(_product.Id);
 
             if (productToUpdate == null)
@@ -168,14 +173,12 @@ namespace shittyEtsy.Views
                 return;
             }
 
-            // Verify ownership again
             if (productToUpdate.UserId != SessionManager.CurrentUser.Id)
             {
                 ShowError("You can only edit your own products.");
                 return;
             }
 
-            // Update product fields
             productToUpdate.Name = name;
             productToUpdate.Description = description;
             productToUpdate.Material = material;
@@ -184,18 +187,14 @@ namespace shittyEtsy.Views
             productToUpdate.Durability = durability;
             productToUpdate.UniqueFeatures = uniqueFeatures;
             productToUpdate.CatagoryId = categoryId;
+            productToUpdate.Price = price;  
 
-            // Update image if new one was selected
             if (_imageData != null)
-            {
                 productToUpdate.ImageData = _imageData;
-            }
 
             db.Product.Update(productToUpdate);
             db.SaveChanges();
-
-            // Navigate back to home
-            Frame.Navigate(typeof(HomePage));
+            Frame.Navigate(typeof(HomePage));   
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -214,7 +213,7 @@ namespace shittyEtsy.Views
                 XamlRoot = XamlRoot
             };
 
-            dialog.PrimaryButtonClick += async (s, args) =>
+            dialog.PrimaryButtonClick += (s, args) =>
             {
                 using var db = new AppDataContext();
                 var productToDelete = db.Product.Find(_product.Id);

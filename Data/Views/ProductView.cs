@@ -9,6 +9,8 @@ namespace shittyEtsy.Views
         public Products Product { get; set; }
         public BitmapImage Image { get; set; }
         public string Name => Product.Name;
+
+        public decimal Price => Product.Price;
         public string Description => Product.Description;
         public string Material => Product.Material;
         public string Complexity => Product.Complexity;

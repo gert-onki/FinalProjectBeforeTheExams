@@ -7,41 +7,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Padding="40" Spacing="16" MaxWidth="600" HorizontalAlignment="Center">
-
             <TextBlock Text="Edit Product" FontSize="28" FontWeight="Bold" Margin="0,0,0,8"/>
-
-            <!-- Product Name -->
             <TextBlock Text="Product Name *" FontWeight="SemiBold"/>
             <TextBox x:Name="NameInput" PlaceholderText="e.g. Handmade Ceramic Mug"/>
-
-            <!-- Category -->
+            <TextBlock Text="Product Price *" FontWeight="SemiBold"/>
+            <NumberBox x:Name="PriceInput" PlaceholderText="e.g. 10.99"/>
             <TextBlock Text="Category *" FontWeight="SemiBold"/>
-            <ComboBox x:Name="CategoryInput" PlaceholderText="Select a category" HorizontalAlignment="Stretch">
-                <ComboBoxItem Content="Jewelry"/>
-                <ComboBoxItem Content="Clothing"/>
-                <ComboBoxItem Content="Home Decor"/>
-                <ComboBoxItem Content="Art"/>
-                <ComboBoxItem Content="Ceramics"/>
-                <ComboBoxItem Content="Woodwork"/>
-                <ComboBoxItem Content="Other"/>
-            </ComboBox>
-
-            <!-- Description -->
+            <ComboBox x:Name="CategoryInput" PlaceholderText="Select a category" HorizontalAlignment="Stretch"/>
             <TextBlock Text="Description *" FontWeight="SemiBold"/>
             <TextBox x:Name="DescriptionInput"
                      PlaceholderText="Describe your product in detail..."
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
                      Height="120"/>
-
-            <!-- Material -->
             <TextBlock Text="Material" FontWeight="SemiBold"/>
             <TextBox x:Name="MaterialInput" PlaceholderText="e.g. Oak wood, Sterling silver, Cotton"/>
-
-            <!-- Production Time -->
             <TextBlock Text="Production Time" FontWeight="SemiBold"/>
             <ComboBox x:Name="ProductionTimeInput" PlaceholderText="How long to make?" HorizontalAlignment="Stretch">
                 <ComboBoxItem Content="Ready to ship"/>
@@ -51,8 +33,6 @@
                 <ComboBoxItem Content="2-4 weeks"/>
                 <ComboBoxItem Content="1+ month"/>
             </ComboBox>
-
-            <!-- Complexity -->
             <TextBlock Text="Complexity" FontWeight="SemiBold"/>
             <ComboBox x:Name="ComplexityInput" PlaceholderText="Select complexity" HorizontalAlignment="Stretch">
                 <ComboBoxItem Content="Simple"/>
@@ -60,8 +40,6 @@
                 <ComboBoxItem Content="Complex"/>
                 <ComboBoxItem Content="Highly Complex"/>
             </ComboBox>
-
-            <!-- Durability -->
             <TextBlock Text="Durability" FontWeight="SemiBold"/>
             <ComboBox x:Name="DurabilityInput" PlaceholderText="Select durability" HorizontalAlignment="Stretch">
                 <ComboBoxItem Content="Fragile"/>
@@ -69,23 +47,15 @@
                 <ComboBoxItem Content="Durable"/>
                 <ComboBoxItem Content="Very Durable"/>
             </ComboBox>
-
-            <!-- Unique Features -->
             <TextBlock Text="Unique Features" FontWeight="SemiBold"/>
             <TextBox x:Name="UniqueFeaturesInput"
                      PlaceholderText="What makes your product special? e.g. Personalized, Eco-friendly..."
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
                      Height="80"/>
-
-            <!-- Product Image -->
             <Button x:Name="PickImageButton" Content="Choose Image" Click="PickImageButton_Click"/>
             <Image x:Name="ImagePreview" MaxHeight="200" Margin="0,8,0,0" Stretch="Uniform" Visibility="Collapsed"/>
-
-            <!-- Error Text -->
             <TextBlock x:Name="ErrorText" Foreground="Red" Visibility="Collapsed" TextWrapping="Wrap"/>
-
-            <!-- Button Panel -->
             <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,8,0,0">
                 <Button x:Name="SaveProductButton"
                         Content="Save Changes"
@@ -93,14 +63,12 @@
                         Click="SaveProductButton_Click"
                         Background="#4CAF50"
                         Foreground="White"/>
-
                 <Button x:Name="GoBackButton"
                         Content="Go Back"
                         HorizontalAlignment="Left"
                         Click="CancelButton_Click"
                         Background="#757575"
                         Foreground="White"/>
-
                 <Button x:Name="DeleteButton"
                         Content="Delete Product"
                         HorizontalAlignment="Left"
@@ -108,7 +76,6 @@
                         Background="#D32F2F"
                         Foreground="White"/>
             </StackPanel>
-
         </StackPanel>
     </ScrollViewer>
-</Page>
+</Page> 

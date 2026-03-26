@@ -28,5 +28,18 @@ namespace shittyEtsy.Data
             );
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Catagories>().HasData(
+                new Catagories { Id = 1, Name = "Jewelry" },
+                new Catagories { Id = 2, Name = "Clothing" },
+                new Catagories { Id = 3, Name = "Home Decor" },
+                new Catagories { Id = 4, Name = "Art" },
+                new Catagories { Id = 5, Name = "Ceramics" },
+                new Catagories { Id = 6, Name = "Woodwork" },
+                new Catagories { Id = 7, Name = "Other" }
+            );
+        }
     }
 }

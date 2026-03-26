@@ -12,6 +12,8 @@ namespace shittyEtsy.Data.Models
         public int UserId { get; set; }
         public int CatagoryId { get; set; }
         public string Name { get; set; }
+
+        public decimal Price { get; set; }
         public string Description { get; set; }
         public byte[]? ImageData { get; set; }
         public string Material { get; set; }
