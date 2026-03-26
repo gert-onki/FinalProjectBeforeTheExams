@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
+using shittyEtsy.Session;
 using shittyEtsy.Views;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,14 @@ namespace shittyEtsy.Views
         private void GoToCreateProductPage_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(CreateProductPage));
+        }
+
+        private void EditProduct_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is int productId)
+            {
+                Frame.Navigate(typeof(EditProductPage), productId);
+            }
         }
     }
 }

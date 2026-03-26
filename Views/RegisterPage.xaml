@@ -47,6 +47,7 @@
                 <StackPanel Orientation="Vertical" Spacing="8" HorizontalAlignment="Center">
                     <TextBlock Text="Already have an account?" HorizontalAlignment="Center" Foreground="#B0B0B0" FontSize="12"/>
                     <Button Content="Sign In" Click="GoToLoginPage_Click" Background="#2196F3" Foreground="White" Padding="12,8" HorizontalAlignment="Center" CornerRadius="4"/>
+                    <Button Content="Go Back" Click="GoBackButton_Click" Background="#757575" Foreground="White" Padding="12,8" HorizontalAlignment="Center" CornerRadius="4"/>
                 </StackPanel>
 
             </StackPanel>

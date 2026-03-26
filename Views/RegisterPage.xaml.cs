@@ -83,5 +83,10 @@ namespace shittyEtsy.Views
         {
             Frame.Navigate(typeof(LoginPage));
         }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LoginPage));
+        }
     }
 }

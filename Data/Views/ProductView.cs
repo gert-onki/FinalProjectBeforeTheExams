@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Media.Imaging;
 using shittyEtsy.Data.Models;
+using shittyEtsy.Session;
 
 namespace shittyEtsy.Views
 {
@@ -14,5 +15,8 @@ namespace shittyEtsy.Views
         public string Durability => Product.Durability;
         public string ProductionTime => Product.ProductionTime;
         public string UniqueFeatures => Product.UniqueFeatures;
+        public int ProductId => Product.Id;
+        public int UserId => Product.UserId;
+        public bool IsOwnProduct => SessionManager.CurrentUser != null && Product.UserId == SessionManager.CurrentUser.Id;
     }
 }
