@@ -66,7 +66,6 @@ namespace shittyEtsy.Views
                 Frame.Navigate(typeof(HomePage));
                 return;
             }
-
             NameInput.Text = _product.Name;
             DescriptionInput.Text = _product.Description;
             MaterialInput.Text = _product.Material;
@@ -85,7 +84,6 @@ namespace shittyEtsy.Views
             SetComboBoxByContent(ProductionTimeInput, _product.ProductionTime);
             SetComboBoxByContent(ComplexityInput, _product.Complexity);
             SetComboBoxByContent(DurabilityInput, _product.Durability);
-
             if (_product.ImageData != null && _product.ImageData.Length > 0)
             {
                 _imageData = _product.ImageData;
