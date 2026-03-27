@@ -1,0 +1,175 @@
+<Page
+    x:Class="shittyEtsy.Views.ShoppingCartPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#111111">
+
+    <Grid MaxWidth="720" Margin="32,24,32,32" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Content="&#8592; Back"
+                    Click="BackButton_Click"
+                    Background="#2A2A2A"
+                    Foreground="White"
+                    Padding="12,7"
+                    CornerRadius="6"/>
+
+            <TextBlock Grid.Column="1"
+                       Text="Shopping cart"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Feedback / Error -->
+        <TextBlock x:Name="FeedbackText"
+                   Grid.Row="1"
+                   Foreground="#4CAF50"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,12"
+                   Visibility="Collapsed"/>
+
+        <!-- Empty state -->
+        <StackPanel x:Name="EmptyState"
+                    Grid.Row="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Spacing="8"
+                    Visibility="Collapsed">
+            <TextBlock Text="&#128722;"
+                       FontSize="48"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Your cart is empty."
+                       Foreground="#555555"
+                       FontSize="16"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Cart items -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="CartList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#1A1A1A"
+                                CornerRadius="10"
+                                Padding="18,14"
+                                Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Spacing="4">
+                                    <TextBlock Text="{Binding Name}"
+                                               FontSize="16"
+                                               FontWeight="SemiBold"
+                                               Foreground="White"/>
+                                    <TextBlock Text="{Binding Material}"
+                                               FontSize="12"
+                                               Foreground="#777777"/>
+                                </StackPanel>
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding PriceFormatted}"
+                                           FontSize="16"
+                                           FontWeight="Bold"
+                                           Foreground="#4CAF50"
+                                           VerticalAlignment="Center"
+                                           Margin="16,0"/>
+
+                                <Button Grid.Column="2"
+                                        Content="✕"
+                                        Tag="{Binding ProductId}"
+                                        Click="RemoveItem_Click"
+                                        Background="#2A2A2A"
+                                        Foreground="#FF5555"
+                                        Padding="8,6"
+                                        CornerRadius="6"
+                                        VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Summary + Buy -->
+        <Border Grid.Row="3"
+                x:Name="CheckoutPanel"
+                Background="#1A1A1A"
+                CornerRadius="12"
+                Padding="20,16"
+                Margin="0,16,0,0"
+                Visibility="Collapsed">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Balance info -->
+                <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Your balance" Foreground="#888888" FontSize="13"/>
+                    <TextBlock Grid.Column="1" x:Name="BalanceText" Foreground="#CCCCCC" FontSize="13"/>
+                </Grid>
+
+                <!-- Total -->
+                <Grid Grid.Row="1" Margin="0,0,0,14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Text="Total"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="White"/>
+                    <TextBlock Grid.Column="1"
+                               x:Name="TotalText"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#4CAF50"/>
+                </Grid>
+
+                <!-- Buy button -->
+                <Button Grid.Row="2"
+                        x:Name="BuyButton"
+                        Content="Buy now"
+                        Click="BuyButton_Click"
+                        HorizontalAlignment="Stretch"
+                        Background="#4CAF50"
+                        Foreground="White"
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Padding="0,12"
+                        CornerRadius="8"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

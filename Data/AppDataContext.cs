@@ -17,8 +17,9 @@ namespace shittyEtsy.Data
         public DbSet<Reviews> Reviews { get; set; }        
         public DbSet<Transaction> Transactions { get; set; } 
         public DbSet<Reports> Reports { get; set; }
-
-
+        public DbSet<OrderItems> OrderItems { get; set; }
+        public DbSet<Orders> Orders { get; set; }
+ 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

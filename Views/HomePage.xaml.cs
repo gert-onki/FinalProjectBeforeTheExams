@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using shittyEtsy.Data.Models;
+using shittyEtsy.Session;
 using shittyEtsy.Views;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,9 @@ namespace shittyEtsy.Views
             foreach (var mat in materials)
                 MaterialFilter.Items.Add(new ComboBoxItem { Content = mat, Tag = mat });
 
+     
+            CartHeaderText.Text = $"Cart ({CartManager.Count})";
+
             ApplyFilters();
         }
 
@@ -102,10 +106,21 @@ namespace shittyEtsy.Views
             Frame.Navigate(typeof(CreateProductPage));
         }
 
+        private void GoToCartPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ShoppingCartPage));
+        }
+
         private void EditProduct_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is int productId)
                 Frame.Navigate(typeof(EditProductPage), productId);
+        }
+
+        private void ViewProduct_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is int productId)
+                Frame.Navigate(typeof(ProductDetailPage), productId);
         }
     }
 }
